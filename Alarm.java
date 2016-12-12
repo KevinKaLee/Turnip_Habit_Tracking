@@ -16,10 +16,17 @@ import java.util.Calendar;
 
 public class Alarm extends AppCompatActivity implements View.OnClickListener {
 
-    Button     setAlarm;
-    AlarmManager alarmManager;
+    public alarmManager monday;
+    public alarmManager tuesday;
+    public alarmManager wednesday;
+    public alarmManager thursday;
+    public alarmManager friday;
+    public alarmManager saturday;
+    public alarmManager sunday;
+
+    Button   setAlarm;
     Calendar calendar;
-    PendingIntent monIntent, tuesIntent, wedIntent, thursIntent, friIntent, satIntent, sunIntent;
+    Calendar test;
 
     CheckBox Monday;
     CheckBox Tuesday;
@@ -29,7 +36,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
     CheckBox Saturday;
     CheckBox Sunday;
 
-    boolean mon = false;
+    boolean mon  = false;
     boolean tues  = false;
     boolean wed   = false;
     boolean thurs = false;
@@ -43,9 +50,9 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_alarm);
         setTitle("Create Habit Alarm");
 
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         setAlarm     = (Button)     findViewById(R.id.setTime);
         calendar     = Calendar.getInstance();
+        test         = Calendar.getInstance();
         Monday       = (CheckBox)findViewById(R.id.Monday);
         Tuesday      = (CheckBox)findViewById(R.id.Tuesday);
         Wednesday    = (CheckBox)findViewById(R.id.Wednesday);
@@ -54,6 +61,14 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         Saturday     = (CheckBox)findViewById(R.id.Saturday);
         Sunday       = (CheckBox)findViewById(R.id.Sunday);
 
+         monday = new alarmManager();
+         tuesday = new alarmManager();
+         wednesday = new alarmManager();
+         thursday = new alarmManager();
+         friday = new alarmManager();
+         saturday = new alarmManager();
+         sunday = new alarmManager();
+
         Monday.setOnClickListener(this);
         Tuesday.setOnClickListener(this);
         Wednesday.setOnClickListener(this);
@@ -61,6 +76,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         Friday.setOnClickListener(this);
         Saturday.setOnClickListener(this);
         Sunday.setOnClickListener(this);
+
 
         // Intent for the Alarm Receiver Class
         setAlarm.setOnClickListener(
@@ -86,104 +102,121 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         );
     }
     // Make Sure an Alarm is not set in the past
-    public void checkDAY(){
-        if(calendar.getTimeInMillis() < System.currentTimeMillis()){
-            calendar.add(Calendar.DAY_OF_YEAR, 7);
+
+    private class alarmManager {
+        int dayOfWeek;
+        int tag;
+        Calendar calendar;
+        Intent alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
+        AlarmManager alarmMan = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        private void getAlarmInfo(Calendar cal, int day, int t){
+            calendar = cal;
+            dayOfWeek = day;
+            tag = t;
+            calendar.set(Calendar.DAY_OF_WEEK,day);
+        }
+
+        private void checkDAY(Calendar cal){
+            if(cal.getTimeInMillis() < System.currentTimeMillis()){
+                cal.add(Calendar.DAY_OF_YEAR, 7);
+            }
+        }
+
+        private void createAlarm(){
+            checkDAY(calendar);
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(Alarm.this, tag, alarmRx, 0);
+            alarmMan.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
+        }
+
+
+        private void cancel(){
+            PendingIntent alarmIntent = PendingIntent.getBroadcast(Alarm.this, tag, alarmRx, 0);
+            alarmIntent.cancel();
+            alarmMan.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
         }
     }
-
     // Switch Used to Create Alarm Instance for Each Day of the Week, when clicked.
     @Override
     public void onClick(View day) {
-        final Intent alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
+        //final Intent alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
         int id = day.getId();
         switch (id) {
             case R.id.Monday:
                 mon = !mon;
                 if(mon){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
-                    checkDAY();
-                    monIntent = PendingIntent.getBroadcast(Alarm.this, 1, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    monday.getAlarmInfo(calendar,2,1);
+                    monday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 1, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+                    monday.cancel();
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),monIntent);
                 break;
             case R.id.Tuesday:
                 tues = !tues;
                 if(tues){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
-                    checkDAY();
-                    tuesIntent = PendingIntent.getBroadcast(Alarm.this, 2, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    test.set(Calendar.HOUR_OF_DAY,16);
+                    test.set(Calendar.MINUTE,56);
+                    tuesday.getAlarmInfo(test,2,2);
+                    tuesday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 2, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+                    tuesday.cancel();
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),tuesIntent);
                 break;
             case R.id.Wednesday:
                 wed = !wed;
                 if(wed){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
-                    checkDAY();
-                    wedIntent = PendingIntent.getBroadcast(Alarm.this, 3, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    wednesday.getAlarmInfo(calendar,4,3);
+                    wednesday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 3, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+                    wednesday.cancel();
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),wedIntent);
                 break;
             case R.id.Thursday:
                 thurs = !thurs;
                 if(thurs){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
-                    checkDAY();
-                    thursIntent = PendingIntent.getBroadcast(Alarm.this, 4, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    thursday.getAlarmInfo(calendar,5,4);
+                    thursday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 4, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+                    thursday.cancel();
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),thursIntent);
                 break;
             case R.id.Friday:
                 fri = !fri;
                 if(fri){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
-                    checkDAY();
-                    friIntent = PendingIntent.getBroadcast(Alarm.this, 5, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    friday.getAlarmInfo(calendar,6,5);
+                    friday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 5, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+                    friday.cancel();
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),friIntent);
                 break;
             case R.id.Saturday:
                 sat = !sat;
                 if(sat){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
-                    checkDAY();
-                    satIntent = PendingIntent.getBroadcast(Alarm.this, 6, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    saturday.getAlarmInfo(calendar,7,6);
+                    saturday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 6, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),satIntent);
                 break;
             case R.id.Sunday:
                 sun = !sun;
                 if(sun){
-                    calendar.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
-                    checkDAY();
-                    sunIntent = PendingIntent.getBroadcast(Alarm.this, 7, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT);
+                    sunday.getAlarmInfo(calendar,1,7);
+                    sunday.createAlarm();
                 }
                 else{
-                    PendingIntent.getBroadcast(Alarm.this, 7, alarmRx, PendingIntent.FLAG_UPDATE_CURRENT).cancel();
+                    sunday.cancel();
                 }
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),sunIntent);
                 break;
             default:
                 Toast.makeText(getApplicationContext(),"Default",Toast.LENGTH_SHORT).show();
         }
     }
 }
+
