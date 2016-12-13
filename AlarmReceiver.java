@@ -1,4 +1,3 @@
-
 package com.example.eoint.turnip;
 
 import android.app.NotificationManager;
@@ -7,30 +6,37 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
-
 import java.util.Random;
 
 public class AlarmReceiver extends BroadcastReceiver {
-    Random random = new Random();
-    int uniqueID = random.nextInt(9999 - 1000) + 1000;
+    Random random = new Random();                       // Each notification given random id
+    int uniqueID = random.nextInt(9999 - 1000) + 1000;  // Duplicate id's overwrite notification
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        // Click Notification and Send To Activity
-        Intent myIntent = new Intent(context,Alarm.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        // Show Intent To Notification
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,uniqueID,myIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        // User brought to Alarm on clicking notification
+        Intent showHabit = new Intent(context,Alarm.class);
+        // Set Intent Flag
+        showHabit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // Pending Intent for the Notification
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,uniqueID,showHabit,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        // Add Pending Intent to Notification
         builder.setContentIntent(pendingIntent);
+        // Set Message Content for Notification
         builder.setContentTitle("Habit");
         builder.setContentText("Time To Habit!");
         builder.setTicker("Habit Time!");
+        // Set Icon for Notification
         builder.setSmallIcon(R.drawable.turnip_icon);
+        // Enable Vibrate
         builder.setDefaults(NotificationCompat.DEFAULT_VIBRATE);
+        // Intent Cancelled after click
         builder.setAutoCancel(true);
-
+        // Create Notification
         notificationManager.notify(uniqueID,builder.build());
     }
 }
+
