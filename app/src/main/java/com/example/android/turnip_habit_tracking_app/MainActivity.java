@@ -3,6 +3,7 @@ package com.example.android.turnip_habit_tracking_app;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,12 +21,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+    private static final int EDITOR_REQUEST_CODE = 1001;
     private CursorAdapter cursorAdapter;
 
 
@@ -40,22 +36,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         String[] from = {DBOpenHelper.HABIT_NAME};
-        int[] to = {android.R.id.text1};
+        int[] to = {R.id.tvNote};
 
-        cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, from, to, 0);
+        cursorAdapter = new HabitsCursorAdapter(this, null,0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 
         getLoaderManager().initLoader(0, null , this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
     }
 
@@ -139,5 +129,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
+    }
+
+    public void openEditorForNewHabit(View view) {
+        Intent intent = new Intent(this ,EditorActivity.class);
+        startActivityForResult(intent , EDITOR_REQUEST_CODE);
     }
 }
