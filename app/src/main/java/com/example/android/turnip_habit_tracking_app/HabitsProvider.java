@@ -24,7 +24,6 @@ public class HabitsProvider extends ContentProvider{
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, HABITS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", HABITS_ID);
-
     }
     private SQLiteDatabase database;
 
