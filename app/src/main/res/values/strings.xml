@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Turnip Habit Tracking</string>
-    <string name="action_settings">Settings</string>
+    <string name="create_sample_data">Create Sample Data</string>
+    <string name="delete_all_habits">Delete All Habits</string>
+    <string name="are_you_sure">Are you sure you want to delete all habits?</string>
+    <string name="all_habits_deleted">All habits deleted</string>
+
 </resources>
