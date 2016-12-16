@@ -21,6 +21,8 @@ public class HabitsProvider extends ContentProvider{
     private static final int HABITS_ID = 2;
     private static  final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
+    public static final String CONTENT_ITEM_TYPE  = "Habit";
+
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, HABITS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", HABITS_ID);
@@ -37,6 +39,11 @@ public class HabitsProvider extends ContentProvider{
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] strings, String selection , String[] strings1, String s1) {
+
+        if (uriMatcher.match(uri) == HABITS_ID) {
+            selection = DBOpenHelper.HABIT_ID + "=" + uri.getLastPathSegment();
+        }
+
         return database.query(DBOpenHelper.TABLE_HABITS, DBOpenHelper.ALL_COLUMNS,selection,null,null,null,DBOpenHelper.HABIT_CREATED + " DESC");
     }
 

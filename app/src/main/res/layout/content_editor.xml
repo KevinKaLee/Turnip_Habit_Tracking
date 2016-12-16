@@ -8,55 +8,40 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:layout_weight="0.06"
-        android:text="Habit Name" />
+        android:text="@string/habit_name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="@string/enter_in_habit_title"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_weight="0.03" />
 
     <TextView
-        android:text="Days To be Reminded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_weight="0.06" />
+        android:id="@+id/textView1"
+        android:layout_weight="0.06"
+        android:text="@string/habit_description" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="@string/optional_description_message"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_weight="0.06" />
-
-    <TextView
-        android:text="Time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:layout_weight="0.06" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_weight="0.06" />
+        android:id="@+id/editText1"
+        android:layout_weight="0.70" />
 
     <Button
-        android:text="Save Habit"
+        android:text="@string/create_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:layout_weight="0.06" />
+        android:layout_weight="0.06"
+        android:onClick=""/>
 </LinearLayout>
