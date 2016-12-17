@@ -44,9 +44,8 @@ public class HabitsProvider extends ContentProvider{
             selection = DBOpenHelper.HABIT_ID + "=" + uri.getLastPathSegment();
         }
 
-        return database.query(DBOpenHelper.TABLE_HABITS, DBOpenHelper.ALL_COLUMNS,selection,null,null,null,DBOpenHelper.HABIT_CREATED + " DESC");
+        return database.query(DBOpenHelper.TABLE_HABITS, DBOpenHelper.ALL_COLUMNS, selection, null,null,null, DBOpenHelper.HABIT_CREATED + " DESC ");
     }
-
 
     @Override
     public String getType(Uri uri) {

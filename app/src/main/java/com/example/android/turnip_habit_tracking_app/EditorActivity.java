@@ -35,12 +35,15 @@ public class EditorActivity extends AppCompatActivity {
             action = Intent.ACTION_INSERT;
             setTitle(getString(R.string.new_habit));
         } else {
-            // For the case of editiing a habit.
+            // For the case of editing a habit.
             action = Intent.ACTION_EDIT;
+            setTitle(getString(R.string.edit_habit));
+
             habitFilter = DBOpenHelper.HABIT_ID +  "=" + uri.getLastPathSegment();
 
             Cursor cursor = getContentResolver().query(uri, DBOpenHelper.ALL_COLUMNS, habitFilter, null , null);
-            assert cursor != null;
+
+
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
             editor.setText(oldText);

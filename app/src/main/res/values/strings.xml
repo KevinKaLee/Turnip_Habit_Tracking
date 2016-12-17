@@ -13,4 +13,5 @@
     <string name="action_delete">Delete</string>
     <string name="habit_deleted">Habit deleted</string>
     <string name="turnip_icon">Turnip Icon</string>
+    <string name="edit_habit">Edit Habit</string>
 </resources>
