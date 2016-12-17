@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,11 +40,27 @@ public class EditorActivity extends AppCompatActivity {
             habitFilter = DBOpenHelper.HABIT_ID +  "=" + uri.getLastPathSegment();
 
             Cursor cursor = getContentResolver().query(uri, DBOpenHelper.ALL_COLUMNS, habitFilter, null , null);
+            assert cursor != null;
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
             editor.setText(oldText);
             editor.requestFocus();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case android.R.id.home:
+                finishedEditing();
+                break;
+            case R.id.action_delete:
+                deleteHabit();
+                break;
+        }
+        return true;
     }
 
     private void finishedEditing(){
@@ -81,6 +99,10 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void deleteHabit() {
+        getContentResolver().delete(HabitsProvider.CONTENT_URI,habitFilter,null);
+        Toast.makeText(this, R.string.habit_deleted, Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
+        finish();
     }
 
     private void insertHabit(String newText) {
@@ -98,6 +120,14 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finishedEditing();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (action.equals(Intent.ACTION_EDIT)){
+            getMenuInflater().inflate(R.menu.menu_editor, menu);
+        }
+        return true;
     }
 
 }

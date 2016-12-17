@@ -10,5 +10,7 @@
     <string name="habit_description">Habit Description</string>
     <string name="enter_in_habit_title">Enter in Habit Title</string>
     <string name="habit_name">Habit Name</string>
-
+    <string name="action_delete">Delete</string>
+    <string name="habit_deleted">Habit deleted</string>
+    <string name="turnip_icon">Turnip Icon</string>
 </resources>

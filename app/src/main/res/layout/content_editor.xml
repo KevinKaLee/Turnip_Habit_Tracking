@@ -35,7 +35,8 @@
         android:hint="@string/optional_description_message"
         android:ems="10"
         android:id="@+id/editText1"
-        android:layout_weight="0.70" />
+        android:layout_weight="0.70"
+        android:gravity="top|left"/>
 
     <Button
         android:text="@string/create_alarm"
