@@ -4,5 +4,14 @@
     <string name="delete_all_habits">Delete All Habits</string>
     <string name="are_you_sure">Are you sure you want to delete all habits?</string>
     <string name="all_habits_deleted">All habits deleted</string>
-
+    <string name="new_habit">New Habit</string>
+    <string name="create_alarm">Create Alarm</string>
+    <string name="optional_description_message">Optional Description Message</string>
+    <string name="habit_description">Habit Description</string>
+    <string name="enter_in_habit_title">Enter in Habit Title</string>
+    <string name="habit_name">Habit Name</string>
+    <string name="action_delete">Delete</string>
+    <string name="habit_deleted">Habit deleted</string>
+    <string name="turnip_icon">Turnip Icon</string>
+    <string name="edit_habit">Edit Habit</string>
 </resources>

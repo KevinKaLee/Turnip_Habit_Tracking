@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -18,13 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int EDITOR_REQUEST_CODE = 1001;
     private CursorAdapter cursorAdapter;
-
 
 
     @Override
@@ -35,14 +34,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
 
-        String[] from = {DBOpenHelper.HABIT_NAME};
-        int[] to = {R.id.tvNote};
-
-        cursorAdapter = new HabitsCursorAdapter(this, null,0);
+        cursorAdapter = new HabitsCursorAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 
-        getLoaderManager().initLoader(0, null , this);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
+                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+                Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
+                intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
+                startActivityForResult(intent, EDITOR_REQUEST_CODE);
+            }
+        });
+        getLoaderManager().initLoader(0, null, this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -67,26 +72,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         int id = item.getItemId();
 
-        switch(id) {
-            case R.id.action_create_sample:
-                insertSampleData();
-                break;
+        switch (id) {
             case R.id.action_delete_all:
-                deleteAllNotes();
+                deleteAllHabits();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteAllNotes() {
+    private void deleteAllHabits() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int button) {
                         if (button == DialogInterface.BUTTON_POSITIVE) {
                             //Insert Data management code here
-                            getContentResolver().delete(HabitsProvider.CONTENT_URI, null , null);
+                            getContentResolver().delete(HabitsProvider.CONTENT_URI, null, null);
                             restartLoader();
                             Toast.makeText(MainActivity.this,
                                     getString(R.string.all_habits_deleted),
@@ -103,22 +105,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-    private void insertSampleData() {
-        insertHabit("Simple Habit");
-        insertHabit("MultiLine \n Hello World");
-        insertHabit("Very long habit that makes it so long it would go pass the screen");
-
-        restartLoader();
-    }
 
     private void restartLoader() {
-        getLoaderManager().restartLoader(0,null,this);
+        getLoaderManager().restartLoader(0, null, this);
     }
 
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, HabitsProvider.CONTENT_URI,null,null,null,null);
+        return new CursorLoader(this, HabitsProvider.CONTENT_URI, null, null, null, null);
     }
 
     @Override
@@ -132,7 +127,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void openEditorForNewHabit(View view) {
-        Intent intent = new Intent(this ,EditorActivity.class);
-        startActivityForResult(intent , EDITOR_REQUEST_CODE);
+        Intent intent = new Intent(this, EditorActivity.class);
+        startActivityForResult(intent, EDITOR_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
+            restartLoader();
+        }
     }
 }
+
