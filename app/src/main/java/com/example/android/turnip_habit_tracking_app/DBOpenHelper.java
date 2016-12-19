@@ -11,11 +11,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Constants for identifying table and columns
-    public static final String TABLE_HABITS = "'habits'";
+    public static final String TABLE_HABITS = "habits";
     public static final String HABIT_ID = "_id";
     public static final String HABIT_NAME = "habitName";
     public static final String HABIT_DESC = "habitDescription";
-    public static final String HABIT_CREATED = "'habitCreated'";
+    public static final String HABIT_CREATED = "habitCreated";
 
     public static final String[] ALL_COLUMNS = {HABIT_ID,HABIT_NAME,HABIT_DESC,HABIT_CREATED};
 
@@ -24,8 +24,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             " CREATE TABLE " + TABLE_HABITS + " ( " +
                     HABIT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     HABIT_NAME + " TEXT, " +
-                    HABIT_CREATED + " TEXT default CURRENT_TIMESTAMP " +
                     HABIT_DESC + " TEXT, " +
+                    HABIT_CREATED + " TEXT default CURRENT_TIMESTAMP " +
                 " ) " ;
 
 
