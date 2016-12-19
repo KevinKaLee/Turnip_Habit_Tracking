@@ -73,9 +73,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_create_sample:
-                insertSampleData();
-                break;
             case R.id.action_delete_all:
                 deleteAllHabits();
                 break;
@@ -108,13 +105,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-    private void insertSampleData() {
-        insertHabit("Simple Habit");
-        insertHabit("MultiLine \n Hello World");
-        insertHabit("Very long habit that makes it so long it would go pass the screen");
-
-        restartLoader();
-    }
 
     private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);

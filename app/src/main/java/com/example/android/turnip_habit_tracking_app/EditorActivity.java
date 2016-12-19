@@ -72,34 +72,34 @@ public class EditorActivity extends AppCompatActivity {
 
     private void finishedEditing(){
         String newText = editor.getText().toString().trim();
-        String habit_Desc = desc_editor.getText().toString().trim();
+        String habitDesc = desc_editor.getText().toString().trim();
         switch(action){
             case Intent.ACTION_INSERT:
                 if (newText.length() == 0 ){
                     setResult(RESULT_CANCELED);
                 }
                 else {
-                    insertHabit(newText, habit_Desc);
+                    insertHabit(newText, habitDesc);
                 }
                 break;
             case Intent.ACTION_EDIT:
                 if (newText.length() == 0 ){
                     deleteHabit();
 
-                }else if (oldText.equals(newText)){
+                }else if (oldText.equals(newText) && oldHabitDesc.equals(habitDesc)){
                     setResult(RESULT_CANCELED);
                 }else {
-                    updateHabit(newText);
+                    updateHabit(newText, habitDesc);
                 }
         }
         finish();
 
     }
 
-    private void updateHabit(String newText) {
+    private void updateHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
-        values.put(DBOpenHelper.HABIT_DESC, newText);
+        values.put(DBOpenHelper.HABIT_DESC, habitDesc);
         getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
         Toast.makeText(this,"Habit updated", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
