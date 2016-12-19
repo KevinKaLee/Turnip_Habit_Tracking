@@ -15,10 +15,10 @@ import android.widget.Toast;
 public class EditorActivity extends AppCompatActivity {
 
     private String action;
-    private EditText editor;
+    private EditText editor, desc_editor;
     private static final int ALARM_REQUEST_CODE = 1002;
     private String habitFilter;
-    private String oldText;
+    private String oldText, oldHabitDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,8 @@ public class EditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor);
 
         editor = (EditText) findViewById(R.id.editText);
+        desc_editor = (EditText) findViewById(R.id.editText1);
+
         Intent intent = getIntent();
 
         // Would be null if insert habit button is pressed
@@ -46,6 +48,8 @@ public class EditorActivity extends AppCompatActivity {
 
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
+            oldHabitDesc = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_DESC));
+            desc_editor.setText(oldHabitDesc);
             editor.setText(oldText);
             editor.requestFocus();
         }
@@ -68,14 +72,14 @@ public class EditorActivity extends AppCompatActivity {
 
     private void finishedEditing(){
         String newText = editor.getText().toString().trim();
-
+        String habit_Desc = desc_editor.getText().toString().trim();
         switch(action){
             case Intent.ACTION_INSERT:
                 if (newText.length() == 0 ){
                     setResult(RESULT_CANCELED);
                 }
                 else {
-                    insertHabit(newText);
+                    insertHabit(newText, habit_Desc);
                 }
                 break;
             case Intent.ACTION_EDIT:
@@ -95,6 +99,7 @@ public class EditorActivity extends AppCompatActivity {
     private void updateHabit(String newText) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
+        values.put(DBOpenHelper.HABIT_DESC, newText);
         getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
         Toast.makeText(this,"Habit updated", Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
@@ -108,9 +113,10 @@ public class EditorActivity extends AppCompatActivity {
         finish();
     }
 
-    private void insertHabit(String newText) {
+    private void insertHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
+        values.put(DBOpenHelper.HABIT_DESC, habitDesc);
         Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
         setResult(RESULT_OK);
     }
