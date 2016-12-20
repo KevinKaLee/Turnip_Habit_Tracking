@@ -24,8 +24,9 @@
             android:authorities="com.example.android.turnip_habit_tracking_app.habitsprovider"
             android:exported="false" />
 
-
-        <activity android:name=".EditorActivity"></activity>
+        <activity android:name=".EditorActivity" />
+        <activity android:name=".Alarm" />
+        <activity android:name=".AlarmTest"></activity>
     </application>
 
 </manifest>

@@ -14,4 +14,12 @@
     <string name="habit_deleted">Habit deleted</string>
     <string name="turnip_icon">Turnip Icon</string>
     <string name="edit_habit">Edit Habit</string>
+    <string name="set_time">Set Time</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
 </resources>

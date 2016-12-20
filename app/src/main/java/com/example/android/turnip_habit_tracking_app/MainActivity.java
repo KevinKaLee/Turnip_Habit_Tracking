@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
 
+        /*
         cursorAdapter = new HabitsCursorAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
@@ -48,17 +49,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
         getLoaderManager().initLoader(0, null, this);
+        */
 
+        // Button just brings user to Editor Activity - Testing Alarm Manager
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View v){
+                        Toast.makeText(getApplicationContext(),"Clicked", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
 
     }
-
+/*
     private void insertHabit(String textHabit) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, textHabit);
         Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,13 +86,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         switch (id) {
             case R.id.action_delete_all:
-                deleteAllHabits();
+                //deleteAllHabits();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+/*
     private void deleteAllHabits() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
@@ -136,6 +163,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
             restartLoader();
         }
-    }
+    }*/
 }
 
