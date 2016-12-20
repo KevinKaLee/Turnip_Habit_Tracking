@@ -122,13 +122,13 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     public void openAlarmview (View view) {
+        finishedEditing();
         Intent intent = new Intent(this, Alarm.class );
         startActivity(intent );
     }
 
     @Override
     public void onBackPressed() {
-        finishedEditing();
     }
 
     @Override
