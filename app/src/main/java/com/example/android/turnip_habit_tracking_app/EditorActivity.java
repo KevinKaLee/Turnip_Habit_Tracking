@@ -122,8 +122,8 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     public void openAlarmview (View view) {
-        Intent intent = new Intent(this ,EditorActivity.class);
-        startActivityForResult(intent , ALARM_REQUEST_CODE);
+        Intent intent = new Intent(this, Alarm.class );
+        startActivity(intent );
     }
 
     @Override
