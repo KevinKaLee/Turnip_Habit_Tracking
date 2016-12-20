@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static android.R.attr.id;
+
 public class EditorActivity extends AppCompatActivity {
 
     private String action;
@@ -19,6 +21,7 @@ public class EditorActivity extends AppCompatActivity {
     private static final int ALARM_REQUEST_CODE = 1002;
     private String habitFilter;
     private String oldText, oldHabitDesc;
+    private String habit_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,10 @@ public class EditorActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().query(uri, DBOpenHelper.ALL_COLUMNS, habitFilter, null , null);
 
-
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
             oldHabitDesc = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_DESC));
+            habit_id = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_ID));
             desc_editor.setText(oldHabitDesc);
             editor.setText(oldText);
             editor.requestFocus();
@@ -117,19 +120,17 @@ public class EditorActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
         values.put(DBOpenHelper.HABIT_DESC, habitDesc);
-        Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
         setResult(RESULT_OK);
     }
 
     public void openAlarmview (View view) {
+
         finishedEditing();
         Intent intent = new Intent(this, Alarm.class );
+        intent.putExtra("habit_id", habit_id);
         startActivity(intent );
     }
 
-    @Override
-    public void onBackPressed() {
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

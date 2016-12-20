@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class Alarm extends AppCompatActivity implements View.OnClickListener {
-    private double habitID;
+    private String habitID;
     private Button setTime;                // Button used to set time of alarm
     private Button saveButton;               // Save Alarm button
     Calendar calendar;               // Calendar
@@ -45,10 +45,11 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         setTitle("Create Habit Alarm");
-        Bundle bundle1 = getIntent().getExtras();
-        //habitID = bundle1.getDouble("ID");
+
+       habitID = getIntent().getExtras().getString("habit_id");
         init();
         initClickListen();
+        Toast.makeText(getApplicationContext(),String.valueOf(habitID),Toast.LENGTH_SHORT).show();
 
 
     }
@@ -59,7 +60,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         calendar = Calendar.getInstance();
         alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
         Bundle bundle2 = new Bundle();
-        bundle2.putDouble("ID",habitID);
+       // bundle2.putDouble("ID",habitID);
         alarmRx.putExtras(bundle2);
         alarmMan = (AlarmManager) getSystemService(ALARM_SERVICE);
         Monday = (CheckBox) findViewById(R.id.Monday);
