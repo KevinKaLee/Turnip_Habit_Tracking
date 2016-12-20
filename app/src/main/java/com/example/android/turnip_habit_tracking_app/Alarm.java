@@ -96,11 +96,10 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(Alarm.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+                        Toast.makeText(getApplicationContext(),"Alarm Saved",Toast.LENGTH_SHORT).show();
+                        finish();
                     }
-                    }
+                }
         );
 
     }

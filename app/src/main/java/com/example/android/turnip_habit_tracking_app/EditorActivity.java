@@ -99,6 +99,7 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
+
     private void updateHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
@@ -120,6 +121,7 @@ public class EditorActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
         values.put(DBOpenHelper.HABIT_DESC, habitDesc);
+        Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
         setResult(RESULT_OK);
     }
 
