@@ -11,6 +11,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -41,15 +43,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
-                Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
-                intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
-                startActivityForResult(intent, EDITOR_REQUEST_CODE);
-            }
-        });
-        getLoaderManager().initLoader(0, null, this);
+            Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+            Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
+            intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
+            startActivityForResult(intent, EDITOR_REQUEST_CODE);
+                }
+            });
+            getLoaderManager().initLoader(0, null, this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
     }
@@ -137,5 +139,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             restartLoader();
         }
     }
+
 }
 
