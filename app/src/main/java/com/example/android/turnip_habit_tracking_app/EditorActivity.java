@@ -22,7 +22,7 @@ public class EditorActivity extends AppCompatActivity {
     private String habitFilter;
     private String oldText, oldHabitDesc;
     private String habit_id;
-
+    private  Uri uri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class EditorActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         // Would be null if insert habit button is pressed
-        Uri uri = intent.getParcelableExtra(HabitsProvider.CONTENT_ITEM_TYPE);
+        uri = intent.getParcelableExtra(HabitsProvider.CONTENT_ITEM_TYPE);
 
         if (uri == null){
             action = Intent.ACTION_INSERT;
@@ -51,7 +51,7 @@ public class EditorActivity extends AppCompatActivity {
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
             oldHabitDesc = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_DESC));
-            habit_id = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_ID));
+            habit_id = uri.getLastPathSegment();
             desc_editor.setText(oldHabitDesc);
             editor.setText(oldText);
             editor.requestFocus();
@@ -122,6 +122,7 @@ public class EditorActivity extends AppCompatActivity {
         values.put(DBOpenHelper.HABIT_NAME, newText);
         values.put(DBOpenHelper.HABIT_DESC, habitDesc);
         Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
+        habit_id = habitURI.getLastPathSegment();
         setResult(RESULT_OK);
     }
 
