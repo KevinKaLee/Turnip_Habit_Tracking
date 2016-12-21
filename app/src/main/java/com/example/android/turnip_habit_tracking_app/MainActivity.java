@@ -20,7 +20,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
+/**
+ * <h1>Habit Tracking App</h1>
+ * The Habit Tracking App implements an application that
+ * allows for the addition of habits and enables the setting of
+ * an alarm to remind the user to perform the habit.
+ * <p>
+ *
+ * @author  Kevin Lee
+ * @version 1.0
+ * @since   21-12-2016
+ */
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int EDITOR_REQUEST_CODE = 1001;
     private CursorAdapter cursorAdapter;
@@ -28,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -55,13 +66,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    /**
+     * Inflates the menu; This adds items to the action bar if it is present.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    /**
+     * This method calls the respective methods on selection of items
+     * in the action bar.
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -80,12 +101,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Opens up to the  Reward Activity
+     */
     private void openRewards() {
         Intent intent = new Intent (this, EditorActivity.class);
         startActivity(intent);
     }
 
-
+    /**
+     * This method asks the user if they are sure they want to delete all habits ,
+     * if returns positive , the habits get deleted and the loader is restarted.
+     */
     private void deleteAllHabits() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
@@ -110,17 +137,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-
+    /**
+     * This method restarts the Loader and is used to refresh the listView when the database
+     * has changed.
+     */
     private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);
     }
 
-
+    /**
+     * This method creates the Loader
+     * @param id
+     * @param args
+     * @return
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this, HabitsProvider.CONTENT_URI, null, null, null, null);
     }
 
+    /**
+     * Swap in a new Cursor, returning the old Cursor
+     * @param loader
+     * @param data
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         cursorAdapter.swapCursor(data);
@@ -131,11 +171,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         cursorAdapter.swapCursor(null);
     }
 
+    /**
+     * This method opens up the Editor Activity when the Floating Action
+     * Button is pressed
+     * @param view
+     */
     public void openEditorForNewHabit(View view) {
         Intent intent = new Intent(this, EditorActivity.class);
         startActivityForResult(intent, EDITOR_REQUEST_CODE);
     }
 
+    /**
+     * This method checks if there has been a change in the database and if
+     * the edited action has been completed then restart the loader to reflect these changes.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {

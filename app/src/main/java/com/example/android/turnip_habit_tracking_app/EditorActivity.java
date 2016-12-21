@@ -23,6 +23,7 @@ public class EditorActivity extends AppCompatActivity {
     private String oldText, oldHabitDesc;
     private String habit_id;
     private  Uri uri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +57,15 @@ public class EditorActivity extends AppCompatActivity {
             editor.setText(oldText);
             editor.requestFocus();
         }
+
     }
 
+    /**
+     * If item selected is to go home then call finishedEditing method
+     * or if bin icon is selected, delete the habit
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -73,6 +81,14 @@ public class EditorActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Captures the text entered by user into the text boxes
+     * if the intent is to insert habit, check if text has been inserted into the
+     * habit title , if not set the result to cancelled , otherwise call the insertHabit
+     * method. If the intent was an edit check if the edited habit title has been deleted
+     * then delete the habit otherwise if nothing has changed , set result to cancelled
+     * otherwise update the new habit using updateHabit()
+     */
     private void finishedEditing(){
         String newText = editor.getText().toString().trim();
         String habitDesc = desc_editor.getText().toString().trim();
@@ -99,7 +115,13 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Places the edited text into the Content resolver which then interacts with the
+     * Content provider class which the updates the edited habits in the database
+     *
+     * @param newText This is the text in the habit title text box
+     * @param habitDesc This is the text in the habit description text box
+     */
     private void updateHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
@@ -110,6 +132,10 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Interacts with the Content Resolver which in turn tells the Content Provider to
+     * delete the selected habit
+     */
     private void deleteHabit() {
         getContentResolver().delete(HabitsProvider.CONTENT_URI,habitFilter,null);
         Toast.makeText(this, R.string.habit_deleted, Toast.LENGTH_SHORT).show();
@@ -117,6 +143,13 @@ public class EditorActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Places the  text into the Content resolver which then interacts with the
+     * Content provider class which then inserts a new habit into the database
+     * The habit id pf the last inserted row is then stored.
+     * @param newText This is the text from the habit title text box
+     * @param habitDesc This is the text from the habit description text box
+     */
     private void insertHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
@@ -126,6 +159,11 @@ public class EditorActivity extends AppCompatActivity {
         setResult(RESULT_OK);
     }
 
+    /**
+     *  When user presses the Create Alarm button it finishes the editing and stores
+     *  the habit_id into the intent to be passed onto the Alarm activity
+     * @param view
+     */
     public void openAlarmview (View view) {
 
         finishedEditing();
@@ -134,7 +172,11 @@ public class EditorActivity extends AppCompatActivity {
         startActivity(intent );
     }
 
-
+    /**
+     * Method gets the menu layout for the menu bar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (action.equals(Intent.ACTION_EDIT)){
