@@ -10,4 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.turnip_habit_tracking_app.AlarmTest">
 
+<<<<<<< HEAD
 </RelativeLayout>
+=======
+</RelativeLayout>
+>>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d

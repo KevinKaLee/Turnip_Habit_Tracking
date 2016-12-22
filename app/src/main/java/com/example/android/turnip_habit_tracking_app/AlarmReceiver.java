@@ -46,4 +46,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create Notification
         notificationManager.notify(uniqueID,builder.build());
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d

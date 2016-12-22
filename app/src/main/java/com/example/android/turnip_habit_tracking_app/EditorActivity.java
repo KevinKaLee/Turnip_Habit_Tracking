@@ -13,7 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import static java.lang.Double.parseDouble;
+=======
+import static android.R.attr.id;
+>>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -22,8 +26,13 @@ public class EditorActivity extends AppCompatActivity {
     private static final int ALARM_REQUEST_CODE = 1002;
     private String habitFilter;
     private String oldText, oldHabitDesc;
+<<<<<<< HEAD
     private Button createAlarm;
     private double habitID;
+=======
+    private String habit_id;
+    private  Uri uri;
+>>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +61,7 @@ public class EditorActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         // Would be null if insert habit button is pressed
-        Uri uri = intent.getParcelableExtra(HabitsProvider.CONTENT_ITEM_TYPE);
+        uri = intent.getParcelableExtra(HabitsProvider.CONTENT_ITEM_TYPE);
 
         if (uri == null){
             action = Intent.ACTION_INSERT;
@@ -66,16 +75,23 @@ public class EditorActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().query(uri, DBOpenHelper.ALL_COLUMNS, habitFilter, null , null);
 
-
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
             oldHabitDesc = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_DESC));
+            habit_id = uri.getLastPathSegment();
             desc_editor.setText(oldHabitDesc);
             editor.setText(oldText);
             editor.requestFocus();
         }
+
     }
 
+    /**
+     * If item selected is to go home then call finishedEditing method
+     * or if bin icon is selected, delete the habit
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -91,6 +107,14 @@ public class EditorActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Captures the text entered by user into the text boxes
+     * if the intent is to insert habit, check if text has been inserted into the
+     * habit title , if not set the result to cancelled , otherwise call the insertHabit
+     * method. If the intent was an edit check if the edited habit title has been deleted
+     * then delete the habit otherwise if nothing has changed , set result to cancelled
+     * otherwise update the new habit using updateHabit()
+     */
     private void finishedEditing(){
         String newText = editor.getText().toString().trim();
         String habitDesc = desc_editor.getText().toString().trim();
@@ -117,6 +141,13 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Places the edited text into the Content resolver which then interacts with the
+     * Content provider class which the updates the edited habits in the database
+     *
+     * @param newText This is the text in the habit title text box
+     * @param habitDesc This is the text in the habit description text box
+     */
     private void updateHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
@@ -127,6 +158,10 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Interacts with the Content Resolver which in turn tells the Content Provider to
+     * delete the selected habit
+     */
     private void deleteHabit() {
         getContentResolver().delete(HabitsProvider.CONTENT_URI,habitFilter,null);
         Toast.makeText(this, R.string.habit_deleted, Toast.LENGTH_SHORT).show();
@@ -134,24 +169,40 @@ public class EditorActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Places the  text into the Content resolver which then interacts with the
+     * Content provider class which then inserts a new habit into the database
+     * The habit id pf the last inserted row is then stored.
+     * @param newText This is the text from the habit title text box
+     * @param habitDesc This is the text from the habit description text box
+     */
     private void insertHabit(String newText, String habitDesc) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.HABIT_NAME, newText);
         values.put(DBOpenHelper.HABIT_DESC, habitDesc);
         Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
+        habit_id = habitURI.getLastPathSegment();
         setResult(RESULT_OK);
     }
 
+    /**
+     *  When user presses the Create Alarm button it finishes the editing and stores
+     *  the habit_id into the intent to be passed onto the Alarm activity
+     * @param view
+     */
     public void openAlarmview (View view) {
-        Intent intent = new Intent(this ,EditorActivity.class);
-        startActivityForResult(intent , ALARM_REQUEST_CODE);
-    }
 
-    @Override
-    public void onBackPressed() {
         finishedEditing();
+        Intent intent = new Intent(this, Alarm.class );
+        intent.putExtra("habit_id", habit_id);
+        startActivity(intent );
     }
 
+    /**
+     * Method gets the menu layout for the menu bar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (action.equals(Intent.ACTION_EDIT)){

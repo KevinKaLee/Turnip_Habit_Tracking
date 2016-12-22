@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Turnip_Habit_Tracking.iml" filepath="$PROJECT_DIR$/Turnip_Habit_Tracking.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/Turnip_Habit_Tracking_App.iml" filepath="$PROJECT_DIR$/Turnip_Habit_Tracking_App.iml" />
+>>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
