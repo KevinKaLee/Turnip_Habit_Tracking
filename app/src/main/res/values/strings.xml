@@ -13,6 +13,7 @@
     <string name="action_delete">Delete</string>
     <string name="habit_deleted">Habit deleted</string>
     <string name="turnip_icon">Turnip Icon</string>
+    <string name="edit_habit">Edit Habit</string>
     <string name="set_time">Set Time</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
@@ -23,4 +24,5 @@
     <string name="sunday">Sunday</string>
     <string name="edit_habit">Edit Habit</string>
     <string name="title_activity_main">MainActivity</string>
+
 </resources>

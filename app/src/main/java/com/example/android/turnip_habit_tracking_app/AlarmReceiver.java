@@ -18,13 +18,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Bundle bundle = intent.getExtras();
-        double habitID = bundle.getDouble("ID");
+        String habitID = bundle.getString("ID");
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // User brought to Alarm on clicking notification
-        Intent showHabit = new Intent(context,Alarm.class);
+        Intent showHabit = new Intent(context,HabitInfo.class);
         Bundle sendBack = new Bundle();
-        sendBack.putDouble("ID",habitID);
+        sendBack.putString("ID",habitID);
         showHabit.putExtras(sendBack);
         // Set Intent Flag
         showHabit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -47,3 +47,4 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationManager.notify(uniqueID,builder.build());
     }
 }
+

@@ -16,9 +16,11 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class Alarm extends AppCompatActivity implements View.OnClickListener {
+
     private String habitID;
     private Button setTime;                // Button used to set time of alarm
     private Button saveButton;               // Save Alarm button
+
     Calendar calendar;               // Calendar
 
     CheckBox Monday;                 // Monday checkbox
@@ -46,21 +48,25 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_alarm);
         setTitle("Create Habit Alarm");
 
-        habitID = getIntent().getExtras().getString("habit_id");
+        Bundle bundle1 = getIntent().getExtras();
+        habitID = bundle1.getString("ID");
         init();
         initClickListen();
-        Toast.makeText(getApplicationContext(),String.valueOf(habitID),Toast.LENGTH_SHORT).show();
-
-
+        Toast.makeText(getApplicationContext(),"ID is...",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),habitID,Toast.LENGTH_SHORT).show();
+        init();
+        initClickListen();
     }
     // Initialise Variables
     private void init() {
         setTime = (Button) findViewById(R.id.setTime);
-        saveButton = (Button) findViewById(R.id.SaveAlarm);
         calendar = Calendar.getInstance();
         alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
         Bundle bundle2 = new Bundle();
-       // bundle2.putDouble("ID",habitID);
+        bundle2.putString("ID",habitID);
+        saveButton = (Button) findViewById(R.id.SaveAlarm);
+        calendar = Calendar.getInstance();
+        alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
         alarmRx.putExtras(bundle2);
         alarmMan = (AlarmManager) getSystemService(ALARM_SERVICE);
         Monday = (CheckBox) findViewById(R.id.Monday);
@@ -70,8 +76,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         Friday = (CheckBox) findViewById(R.id.Friday);
         Saturday = (CheckBox) findViewById(R.id.Saturday);
         Sunday = (CheckBox) findViewById(R.id.Sunday);
-
-    }
+}
     // Initialise Listeners for each Checkbox
     private void initClickListen(){
         Monday   .setOnClickListener(this);
@@ -81,7 +86,6 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         Friday   .setOnClickListener(this);
         Saturday .setOnClickListener(this);
         Sunday   .setOnClickListener(this);
-
         // Set alarm time on button click
         setTime.setOnClickListener(
                 new Button.OnClickListener(){
@@ -89,15 +93,12 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                         setAlarmTime();
                     }
                 }
-
         );
-
         saveButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(),"Alarm Saved",Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 }
         );
@@ -155,6 +156,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                 alarmManager(calendar,4,3,wed);    // Creates Wednesday alarm
                 break;
             case R.id.Thursday:
+                Toast.makeText(getApplicationContext(),"Here",Toast.LENGTH_SHORT).show();
                 thurs = !thurs;                    // Track state of checkbox
                 alarmManager(calendar,5,4,thurs);  // Creates Thursday alarm
                 break;
@@ -174,7 +176,4 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(getApplicationContext(),"Default",Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
 }

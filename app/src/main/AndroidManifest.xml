@@ -30,6 +30,8 @@
 
         <activity android:name=".PointsActivity"></activity>
 
+        <activity android:name=".HabitInfo"/>
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>
