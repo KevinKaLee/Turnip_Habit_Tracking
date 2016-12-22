@@ -22,7 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         // User brought to Alarm on clicking notification
-        Intent showHabit = new Intent(context,AlarmTest.class);
+        Intent showHabit = new Intent(context,Alarm.class);
         Bundle sendBack = new Bundle();
         sendBack.putDouble("ID",habitID);
         showHabit.putExtras(sendBack);
