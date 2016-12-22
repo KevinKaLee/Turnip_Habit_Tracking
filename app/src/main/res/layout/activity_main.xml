@@ -23,6 +23,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
+<<<<<<< HEAD
         <include layout="@layout/content_main" />
 
         <android.support.design.widget.FloatingActionButton
@@ -33,5 +34,8 @@
             android:layout_margin="@dimen/fab_margin"
             android:onClick="openEditorForNewHabit"
             app:srcCompat="@drawable/ic_action_add" />
+=======
+    <include layout="@layout/content_main" />
+>>>>>>> 61efe72c05eb14dbacd0c0366336ac28a3b9fabe
 
     </android.support.design.widget.CoordinatorLayout>

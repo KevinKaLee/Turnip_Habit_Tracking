@@ -1,128 +1,91 @@
 package com.example.android.turnip_habit_tracking_app;
 
-<<<<<<< HEAD
 import android.app.AlertDialog;
-import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-=======
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
->>>>>>> 61efe72c05eb14dbacd0c0366336ac28a3b9fabe
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-/**
- * <h1>Habit Tracking App</h1>
- * The Habit Tracking App implements an application that
- * allows for the addition of habits and enables the setting of
- * an alarm to remind the user to perform the habit.
- * <p>
- *
- * @author  Kevin Lee
- * @version 1.0
- * @since   21-12-2016
- */
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+public class MainHabitsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int EDITOR_REQUEST_CODE = 1001;
     private CursorAdapter cursorAdapter;
-=======
-import android.content.Intent;
->>>>>>> 61efe72c05eb14dbacd0c0366336ac28a3b9fabe
 
-public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_habits);
+        //setContentView(R.layout.activity_points);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-<<<<<<< HEAD
 
 
         cursorAdapter = new HabitsCursorAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 
+        /*cursorAdapter = new PointsAdapter(this, null, 0);
+        ListView list = (ListView) findViewById(android.R.id.list);
+        list.setAdapter(cursorAdapter);*/
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
-                Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
-                intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
-                startActivityForResult(intent, EDITOR_REQUEST_CODE);
-            }
-        });
-        getLoaderManager().initLoader(0, null, this);
+            Intent intent = new Intent(MainHabitsActivity.this, EditorActivity.class);
+            Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
+            intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
+            startActivityForResult(intent, EDITOR_REQUEST_CODE);
+                }
+            });
+            getLoaderManager().initLoader(0, null, this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
     }
 
-    /**
-     * Inflates the menu; This adds items to the action bar if it is present.
-     * @param menu
-     * @return
-     */
+    private void insertHabit(String textHabit) {
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.HABIT_NAME, textHabit);
+        Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    /**
-     * This method calls the respective methods on selection of items
-     * in the action bar.
-     * @param item
-     * @return
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-
         int id = item.getItemId();
 
-        if  (id == R.id.action_delete_all) {
-            deleteAllHabits();
+        switch (id) {
+            case R.id.action_delete_all:
+                deleteAllHabits();
+                break;
         }
-
-        if (id == R.id.rewards){
-            openRewards();
-        }
-
 
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Opens up to the  Reward Activity
-     */
-    private void openRewards() {
-        Intent intent = new Intent (this, EditorActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * This method asks the user if they are sure they want to delete all habits ,
-     * if returns positive , the habits get deleted and the loader is restarted.
-     */
     private void deleteAllHabits() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
@@ -132,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                             //Insert Data management code here
                             getContentResolver().delete(HabitsProvider.CONTENT_URI, null, null);
                             restartLoader();
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(MainHabitsActivity.this,
                                     getString(R.string.all_habits_deleted),
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -147,30 +110,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * This method restarts the Loader and is used to refresh the listView when the database
-     * has changed.
-     */
+
     private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);
     }
 
-    /**
-     * This method creates the Loader
-     * @param id
-     * @param args
-     * @return
-     */
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this, HabitsProvider.CONTENT_URI, null, null, null, null);
     }
 
-    /**
-     * Swap in a new Cursor, returning the old Cursor
-     * @param loader
-     * @param data
-     */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         cursorAdapter.swapCursor(data);
@@ -181,23 +131,11 @@ public class MainActivity extends AppCompatActivity {
         cursorAdapter.swapCursor(null);
     }
 
-    /**
-     * This method opens up the Editor Activity when the Floating Action
-     * Button is pressed
-     * @param view
-     */
     public void openEditorForNewHabit(View view) {
         Intent intent = new Intent(this, EditorActivity.class);
         startActivityForResult(intent, EDITOR_REQUEST_CODE);
     }
 
-    /**
-     * This method checks if there has been a change in the database and if
-     * the edited action has been completed then restart the loader to reflect these changes.
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -206,18 +144,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-=======
-    }
 
-    public void onClickHabits(View view){
-        Intent intent = new Intent(this, MainHabitsActivity.class);
-        startActivity(intent);
-    }
-
-    public void onClickPoints(View view){
-        Intent intent = new Intent(this, PointsActivity.class);
-        startActivity(intent);
-    }
-
-}
->>>>>>> 61efe72c05eb14dbacd0c0366336ac28a3b9fabe

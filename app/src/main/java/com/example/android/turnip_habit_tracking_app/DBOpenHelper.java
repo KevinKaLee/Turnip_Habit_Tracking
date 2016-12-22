@@ -18,9 +18,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String HABIT_ID = "_id";               // Key identifier making each habit uniquely identifiable
     public static final String HABIT_NAME = "habitName";
     public static final String HABIT_DESC = "habitDescription";
+<<<<<<< HEAD
     public static final String HABIT_CREATED = "habitCreated"; // Used for showing that the habit has been created
+=======
+    public static final String HABIT_CREATED = "habitCreated";
+    public static final String HABIT_POINTS = "habitPoints";
+>>>>>>> 61efe72c05eb14dbacd0c0366336ac28a3b9fabe
 
-    public static final String[] ALL_COLUMNS = {HABIT_ID,HABIT_NAME,HABIT_DESC,HABIT_CREATED};
+    public static final String[] ALL_COLUMNS = {HABIT_ID,HABIT_NAME,HABIT_DESC,HABIT_CREATED, HABIT_POINTS};
 
     //SQL to create Table
     private static final String TABLE_CREATE =
@@ -28,7 +33,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                     HABIT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     HABIT_NAME + " TEXT, " +
                     HABIT_DESC + " TEXT, " +
-                    HABIT_CREATED + " TEXT default CURRENT_TIMESTAMP " +
+                    HABIT_CREATED + " TEXT default CURRENT_TIMESTAMP, " +
+                    HABIT_POINTS + " INTEGER default 0 " +
                 " ) " ;
 
 
