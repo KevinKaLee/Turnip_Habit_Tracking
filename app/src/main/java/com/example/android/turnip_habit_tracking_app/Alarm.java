@@ -46,7 +46,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_alarm);
         setTitle("Create Habit Alarm");
 
-       habitID = getIntent().getExtras().getString("habit_id");
+        habitID = getIntent().getExtras().getString("habit_id");
         init();
         initClickListen();
         Toast.makeText(getApplicationContext(),String.valueOf(habitID),Toast.LENGTH_SHORT).show();

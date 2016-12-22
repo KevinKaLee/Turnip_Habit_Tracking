@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+/**
+ * Adapter that exposes data from a Cursor to a ListView widget.
+ */
 public class HabitsCursorAdapter extends CursorAdapter {
 
     public HabitsCursorAdapter(MainHabitsActivity context, Cursor c, int flags) {
@@ -20,6 +22,14 @@ public class HabitsCursorAdapter extends CursorAdapter {
        return LayoutInflater.from(context).inflate(R.layout.node_list_item,parent,false);
     }
 
+    /**
+     *  Stores the habit's name in habitText and checks if there is a line feed in text.
+     *  Replaces with ... if there is.
+     *  Then sets the habits name into the textView of the listView node
+     * @param view
+     * @param context
+     * @param cursor
+     */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
