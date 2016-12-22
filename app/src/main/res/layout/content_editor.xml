@@ -35,7 +35,8 @@
         android:hint="@string/optional_description_message"
         android:ems="10"
         android:id="@+id/editText1"
-        android:layout_weight="0.70" />
+        android:layout_weight="0.70"
+        android:gravity="top|left"/>
 
     <Button
         android:text="@string/create_alarm"
@@ -43,5 +44,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/button"
         android:layout_weight="0.06"
-        android:onClick=""/>
+        android:onClick="openAlarmview"/>
 </LinearLayout>

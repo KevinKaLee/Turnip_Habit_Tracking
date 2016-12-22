@@ -7,7 +7,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+
 
 public class HabitsProvider extends ContentProvider{
 
@@ -36,7 +36,7 @@ public class HabitsProvider extends ContentProvider{
         return true;
     }
 
-    @Nullable
+
     @Override
     public Cursor query(Uri uri, String[] strings, String selection , String[] strings1, String s1) {
 
@@ -44,16 +44,15 @@ public class HabitsProvider extends ContentProvider{
             selection = DBOpenHelper.HABIT_ID + "=" + uri.getLastPathSegment();
         }
 
-        return database.query(DBOpenHelper.TABLE_HABITS, DBOpenHelper.ALL_COLUMNS,selection,null,null,null,DBOpenHelper.HABIT_CREATED + " DESC");
+        return database.query(DBOpenHelper.TABLE_HABITS, DBOpenHelper.ALL_COLUMNS, selection, null,null,null, DBOpenHelper.HABIT_CREATED + " DESC ");
     }
 
-    @Nullable
     @Override
     public String getType(Uri uri) {
         return null;
     }
 
-    @Nullable
+
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         long id = database.insert(DBOpenHelper.TABLE_HABITS, null ,contentValues);
@@ -66,7 +65,7 @@ public class HabitsProvider extends ContentProvider{
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+    public int update( Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         return database.update(DBOpenHelper.TABLE_HABITS, contentValues , selection,selectionArgs);
     }
 }

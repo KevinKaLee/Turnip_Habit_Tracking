@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class HabitsCursorAdapter extends CursorAdapter {
 
-    public HabitsCursorAdapter(Context context, Cursor c, int flags) {
+    public HabitsCursorAdapter(MainHabitsActivity context, Cursor c, int flags) {
         super(context, c, flags);
     }
 

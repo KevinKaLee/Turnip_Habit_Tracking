@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_alarm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.android.turnip_habit_tracking_app.Alarm">
+
+    <Button
+        android:text="@string/set_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:id="@+id/setTime"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/monday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Monday"
+        android:layout_below="@+id/setTime"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/tuesday"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Monday"
+        android:id="@+id/Tuesday"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/wednesday"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Tuesday"
+        android:id="@+id/Wednesday"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/thursday"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Wednesday"
+        android:id="@+id/Thursday"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/friday"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Thursday"
+        android:id="@+id/Friday"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/saturday"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Friday"
+        android:id="@+id/Saturday"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:text="@string/sunday"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Saturday"
+        android:id="@+id/Sunday"
+        android:textSize="24sp" />
+
+    <Button
+        android:text="Save Alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/Monday"
+        android:layout_toEndOf="@+id/Monday"
+        android:layout_marginBottom="19dp"
+        android:id="@+id/SaveAlarm"
+        android:onClick="SaveAlarm"/>
+</RelativeLayout>

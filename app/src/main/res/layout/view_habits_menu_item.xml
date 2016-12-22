@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     android:gravity="center_vertical"
     android:padding="4dp">
 
@@ -21,9 +22,22 @@
         android:layout_margin="4dp"
         android:layout_toEndOf="@+id/imageDocIcon"
         android:layout_toRightOf="@+id/imageDocIcon"
-        android:text="Dummy Text"
+        android:text="View Habits"
         android:textColor="@color/list_item_text"
         android:textSize="18sp"
         android:maxLines="1" />
+
+    <Button
+        android:text="Go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:id="@+id/HabitsButton"
+        android:onClick= "onClickHabits"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/tvNote"
+        android:layout_alignEnd="@+id/tvNote" />
+
 
 </RelativeLayout>
