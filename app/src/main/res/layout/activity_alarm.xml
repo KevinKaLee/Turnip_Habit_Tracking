@@ -80,9 +80,7 @@
         android:layout_below="@+id/Saturday"
         android:id="@+id/Sunday"
         android:textSize="24sp" />
-<<<<<<< HEAD
-</RelativeLayout>
-=======
+
 
     <Button
         android:text="Save Alarm"
@@ -95,4 +93,4 @@
         android:id="@+id/SaveAlarm"
         android:onClick="SaveAlarm"/>
 </RelativeLayout>
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
+

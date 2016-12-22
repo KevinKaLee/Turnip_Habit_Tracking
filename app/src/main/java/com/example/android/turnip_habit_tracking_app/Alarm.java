@@ -1,9 +1,6 @@
 package com.example.android.turnip_habit_tracking_app;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
@@ -19,14 +16,11 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class Alarm extends AppCompatActivity implements View.OnClickListener {
-<<<<<<< HEAD
-    double habitID;
-    Button setTime;                // Button used to set time of alarm
-=======
+
     private String habitID;
     private Button setTime;                // Button used to set time of alarm
     private Button saveButton;               // Save Alarm button
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
+
     Calendar calendar;               // Calendar
 
     CheckBox Monday;                 // Monday checkbox
@@ -53,37 +47,26 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         setTitle("Create Habit Alarm");
-<<<<<<< HEAD
+
         Bundle bundle1 = getIntent().getExtras();
-        habitID = bundle1.getDouble("ID");
+        habitID = bundle1.getString("ID");
         init();
         initClickListen();
-        Toast.makeText(getApplicationContext(),String.valueOf(habitID),Toast.LENGTH_SHORT).show();
-=======
-
-        habitID = getIntent().getExtras().getString("habit_id");
+        Toast.makeText(getApplicationContext(),"ID is...",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),habitID,Toast.LENGTH_SHORT).show();
         init();
         initClickListen();
-        Toast.makeText(getApplicationContext(),String.valueOf(habitID),Toast.LENGTH_SHORT).show();
-
-
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
     }
     // Initialise Variables
     private void init() {
         setTime = (Button) findViewById(R.id.setTime);
-<<<<<<< HEAD
         calendar = Calendar.getInstance();
         alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
         Bundle bundle2 = new Bundle();
-        bundle2.putDouble("ID",habitID);
-=======
+        bundle2.putString("ID",habitID);
         saveButton = (Button) findViewById(R.id.SaveAlarm);
         calendar = Calendar.getInstance();
         alarmRx = new Intent(Alarm.this, AlarmReceiver.class);
-        Bundle bundle2 = new Bundle();
-       // bundle2.putDouble("ID",habitID);
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
         alarmRx.putExtras(bundle2);
         alarmMan = (AlarmManager) getSystemService(ALARM_SERVICE);
         Monday = (CheckBox) findViewById(R.id.Monday);
@@ -93,11 +76,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         Friday = (CheckBox) findViewById(R.id.Friday);
         Saturday = (CheckBox) findViewById(R.id.Saturday);
         Sunday = (CheckBox) findViewById(R.id.Sunday);
-<<<<<<< HEAD
-=======
-
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
-    }
+}
     // Initialise Listeners for each Checkbox
     private void initClickListen(){
         Monday   .setOnClickListener(this);
@@ -107,10 +86,6 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         Friday   .setOnClickListener(this);
         Saturday .setOnClickListener(this);
         Sunday   .setOnClickListener(this);
-<<<<<<< HEAD
-=======
-
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
         // Set alarm time on button click
         setTime.setOnClickListener(
                 new Button.OnClickListener(){
@@ -118,23 +93,16 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                         setAlarmTime();
                     }
                 }
-<<<<<<< HEAD
         );
-=======
-
-        );
-
         saveButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(),"Alarm Saved",Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 }
         );
 
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
     }
     // Use Timer Dialog to input alarm time from user
     private void setAlarmTime(){
@@ -188,6 +156,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                 alarmManager(calendar,4,3,wed);    // Creates Wednesday alarm
                 break;
             case R.id.Thursday:
+                Toast.makeText(getApplicationContext(),"Here",Toast.LENGTH_SHORT).show();
                 thurs = !thurs;                    // Track state of checkbox
                 alarmManager(calendar,5,4,thurs);  // Creates Thursday alarm
                 break;
@@ -207,11 +176,4 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(getApplicationContext(),"Default",Toast.LENGTH_SHORT).show();
         }
     }
-<<<<<<< HEAD
 }
-=======
-
-
-
-}
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d

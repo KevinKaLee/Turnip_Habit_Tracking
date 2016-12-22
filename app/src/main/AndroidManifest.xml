@@ -26,10 +26,8 @@
 
         <activity android:name=".EditorActivity" />
         <activity android:name=".Alarm" />
-<<<<<<< HEAD
-        <activity android:name=".AlarmTest"></activity>
-=======
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
+        <activity android:name=".HabitInfo"/>
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setSupportActionBar(toolbar);
 
 
-        /*
         cursorAdapter = new HabitsCursorAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-<<<<<<< HEAD
                 Intent intent = new Intent(MainActivity.this, EditorActivity.class);
                 Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
                 intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
@@ -61,42 +59,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
         getLoaderManager().initLoader(0, null, this);
-        */
-=======
-            Intent intent = new Intent(MainActivity.this, EditorActivity.class);
-            Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
-            intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
-            startActivityForResult(intent, EDITOR_REQUEST_CODE);
-                }
-            });
-            getLoaderManager().initLoader(0, null, this);
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
 
-        // Button just brings user to Editor Activity - Testing Alarm Manager
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(
-                new View.OnClickListener(){
-                    public void onClick(View v){
-                        Toast.makeText(getApplicationContext(),"Clicked", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
 
 
-<<<<<<< HEAD
-    }
-/*
-    private void insertHabit(String textHabit) {
-        ContentValues values = new ContentValues();
-        values.put(DBOpenHelper.HABIT_NAME, textHabit);
-        Uri habitURI = getContentResolver().insert(HabitsProvider.CONTENT_URI, values);
-    }*/
-=======
 
     }
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
 
     /**
      * Inflates the menu; This adds items to the action bar if it is present.
@@ -121,15 +89,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         int id = item.getItemId();
 
-<<<<<<< HEAD
-        switch (id) {
-            case R.id.action_delete_all:
-                //deleteAllHabits();
-                break;
-=======
         if  (id == R.id.action_delete_all) {
-                deleteAllHabits();
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
+            deleteAllHabits();
         }
 
         if (id == R.id.rewards){
@@ -140,23 +101,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-/*
-=======
     /**
      * Opens up to the  Reward Activity
      */
@@ -169,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      * This method asks the user if they are sure they want to delete all habits ,
      * if returns positive , the habits get deleted and the loader is restarted.
      */
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
     private void deleteAllHabits() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
@@ -250,11 +193,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
             restartLoader();
         }
-<<<<<<< HEAD
-    }*/
-=======
     }
 
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
 }
-

@@ -13,12 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-<<<<<<< HEAD
-import static java.lang.Double.parseDouble;
-=======
-import static android.R.attr.id;
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
-
 public class EditorActivity extends AppCompatActivity {
 
     private String action;
@@ -26,13 +20,12 @@ public class EditorActivity extends AppCompatActivity {
     private static final int ALARM_REQUEST_CODE = 1002;
     private String habitFilter;
     private String oldText, oldHabitDesc;
-<<<<<<< HEAD
+
     private Button createAlarm;
     private double habitID;
-=======
     private String habit_id;
     private  Uri uri;
->>>>>>> 868c07b0cd8bdb70975378bcf46913cf84d78e9d
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +35,11 @@ public class EditorActivity extends AppCompatActivity {
         editor = (EditText) findViewById(R.id.editText);
         desc_editor = (EditText) findViewById(R.id.editText1);
         createAlarm = (Button) findViewById(R.id.button);
-        //habitID = Double.parseDouble(DBOpenHelper.HABIT_ID);
-
-        Toast.makeText(getApplicationContext(),/*String.valueOf(habitID)*/"Hello",Toast.LENGTH_SHORT).show();
 
         createAlarm.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
-                        Intent intent = new Intent(EditorActivity.this, Alarm.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putDouble("ID",habitID);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        openAlarmview(v);
                     }
         }
         );
@@ -191,11 +177,10 @@ public class EditorActivity extends AppCompatActivity {
      * @param view
      */
     public void openAlarmview (View view) {
-
         finishedEditing();
         Intent intent = new Intent(this, Alarm.class );
-        intent.putExtra("habit_id", habit_id);
-        startActivity(intent );
+        intent.putExtra("ID", habit_id);
+        startActivity(intent);
     }
 
     /**
