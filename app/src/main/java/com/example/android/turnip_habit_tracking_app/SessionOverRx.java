@@ -11,7 +11,13 @@ import android.support.v7.app.NotificationCompat;
 import java.util.Random;
 
 /**
- * Created by eoint on 12/23/2016.
+ * <h1>SessionOverRx</h1>
+ * Generates a notification for when the habit session is over.
+ * <p>
+ *
+ * @author  Eoin Thompson
+ * @version 1.0
+ * @since   23-12-2016
  */
 
 public class SessionOverRx extends BroadcastReceiver {
