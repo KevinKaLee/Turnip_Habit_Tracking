@@ -1,6 +1,5 @@
 package com.example.android.turnip_habit_tracking_app;
 
-
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -12,7 +11,6 @@ import android.net.Uri;
  * Content Provider Class used to manage access with the database providing co-ordinated access
  * to the Content Resolver Object.
  */
-
 
 public class HabitsProvider extends ContentProvider{
 
@@ -106,4 +104,7 @@ public class HabitsProvider extends ContentProvider{
     public int update( Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         return database.update(DBOpenHelper.TABLE_HABITS, contentValues , selection,selectionArgs);
     }
+
+
+
 }

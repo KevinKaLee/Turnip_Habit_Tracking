@@ -1,6 +1,7 @@
 package com.example.android.turnip_habit_tracking_app;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -62,6 +63,5 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXIST" + HABIT_NAME );
         onCreate(db);
     }
-
 
 }

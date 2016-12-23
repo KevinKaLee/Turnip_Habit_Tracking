@@ -1,7 +1,6 @@
 package com.example.android.turnip_habit_tracking_app;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -199,6 +198,7 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
      * @param resultCode
      * @param data
      */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDITOR_REQUEST_CODE && resultCode == RESULT_OK) {
