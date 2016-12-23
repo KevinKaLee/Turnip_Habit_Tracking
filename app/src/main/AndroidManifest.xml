@@ -27,20 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
-        <provider
-            android:name=".HabitsProvider"
-            android:authorities="com.example.android.turnip_habit_tracking_app.habitsprovider"
-            android:exported="false" />
-
-        <activity android:name=".EditorActivity" />
-        <activity android:name=".Alarm" />
-        <activity android:name=".HabitInfo"/>
-        <receiver android:name=".AlarmReceiver" />
-=======
         <activity android:name=".PointsActivity"></activity>
->>>>>>> 61efe72c05eb14dbacd0c0366336ac28a3b9fabe
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

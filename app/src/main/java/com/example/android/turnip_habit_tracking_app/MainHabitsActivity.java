@@ -46,15 +46,15 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-            Intent intent = new Intent(MainHabitsActivity.this, EditorActivity.class);
-            Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
-            intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
-            startActivityForResult(intent, EDITOR_REQUEST_CODE);
-                }
-            });
-            getLoaderManager().initLoader(0, null, this);
+                Intent intent = new Intent(MainHabitsActivity.this, EditorActivity.class);
+                Uri uri = Uri.parse(HabitsProvider.CONTENT_URI + "/" + id);
+                intent.putExtra(HabitsProvider.CONTENT_ITEM_TYPE, uri);
+                startActivityForResult(intent, EDITOR_REQUEST_CODE);
+            }
+        });
+        getLoaderManager().initLoader(0, null, this);
 
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
     }
@@ -144,4 +144,3 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
     }
 
 }
-
