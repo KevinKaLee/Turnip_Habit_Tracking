@@ -7,13 +7,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-<<<<<<< HEAD
-=======
 /**
  * Content Provider Class used to manage access with the database providing co-ordinated access
  * to the Content Resolver Object.
  */
->>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
 
 public class HabitsProvider extends ContentProvider{
 
@@ -35,6 +32,11 @@ public class HabitsProvider extends ContentProvider{
     }
     private SQLiteDatabase database;
 
+    /**
+     * Once database is opened, it is the cached. getWritableDatabase() returns a
+     * SQLiteDatabase which provides methods to perform SQL queries.
+     * @return
+     */
     @Override
     public boolean onCreate() {
         DBOpenHelper helper = new DBOpenHelper(getContext());
@@ -42,7 +44,15 @@ public class HabitsProvider extends ContentProvider{
         return true;
     }
 
-
+    /**
+     *  Matches the uri with the unique identifier for the habit and returns back that row.
+     * @param uri
+     * @param strings
+     * @param selection
+     * @param strings1
+     * @param s1
+     * @return
+     */
     @Override
     public Cursor query(Uri uri, String[] strings, String selection , String[] strings1, String s1) {
 
@@ -58,27 +68,43 @@ public class HabitsProvider extends ContentProvider{
         return null;
     }
 
-
+    /**
+     * Inserts in a new row into the database
+     * @param uri
+     * @param contentValues
+     * @return
+     */
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         long id = database.insert(DBOpenHelper.TABLE_HABITS, null ,contentValues);
         return Uri.parse(BASE_PATH + "/" + id);
     }
 
+    /**
+     * Deletes the corresponding row
+     * @param uri
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         return database.delete(DBOpenHelper.TABLE_HABITS,selection,selectionArgs);
     }
 
+    /**
+     * Updates the corresponding row
+     * @param uri
+     * @param contentValues
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int update( Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
         return database.update(DBOpenHelper.TABLE_HABITS, contentValues , selection,selectionArgs);
     }
-<<<<<<< HEAD
-}
-=======
 
 
 
 }
->>>>>>> becb5aba28c3d48769ad0186fc7602a956257370

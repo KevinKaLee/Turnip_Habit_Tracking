@@ -4,37 +4,17 @@ package com.example.android.turnip_habit_tracking_app;
  * Created by emma on 21/12/16.
  */
 
-<<<<<<< HEAD
-
-import android.app.AlertDialog;
-import android.content.ContentValues;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-=======
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
->>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-=======
 import android.widget.ListView;
 import android.widget.TextView;
->>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
 import android.widget.Toast;
 
 
@@ -91,11 +71,7 @@ public class PointsActivity extends AppCompatActivity implements LoaderManager.L
         cursorAdapter.swapCursor(null);
     }
 
-<<<<<<< HEAD
-}
-=======
 
 
 
 }
->>>>>>> becb5aba28c3d48769ad0186fc7602a956257370

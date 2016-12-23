@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,11 +23,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-<<<<<<< HEAD
-=======
-        </android.support.design.widget.AppBarLayout>
-
->>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
     <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>
