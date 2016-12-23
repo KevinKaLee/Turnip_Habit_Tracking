@@ -10,23 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.turnip_habit_tracking_app.Alarm">
 
-    <Button
-        android:text="@string/set_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:id="@+id/setTime"
-        android:textSize="24sp" />
-
-    <CheckBox
-        android:text="@string/monday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/Monday"
-        android:layout_below="@+id/setTime"
-        android:textSize="24sp" />
-
     <CheckBox
         android:text="@string/tuesday"
         android:layout_marginTop="10dp"
@@ -83,14 +66,43 @@
 
 
     <Button
+        android:text="Set Start Time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/StartButton"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="SET FINISH TIME"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FinishButton"
+        android:textSize="24sp"
+        android:layout_below="@+id/StartButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:text="Save Alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:id="@+id/SaveAlarm"
+        android:onClick="SaveAlarm"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:text="@string/monday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/Monday"
-        android:layout_toEndOf="@+id/Monday"
-        android:layout_marginBottom="19dp"
-        android:id="@+id/SaveAlarm"
-        android:onClick="SaveAlarm"/>
+        android:layout_marginTop="44dp"
+        android:id="@+id/Monday"
+        android:textSize="24sp"
+        android:layout_below="@+id/FinishButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
 

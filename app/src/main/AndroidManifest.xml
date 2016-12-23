@@ -27,15 +27,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PointsActivity" />
+        <activity android:name=".HabitInfo" />
 
-        <activity android:name=".PointsActivity"></activity>
-
-        <activity android:name=".HabitInfo"/>
-        <receiver android:name=".AlarmReceiver" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".SessionOverRx" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".ConfirmSession"></activity>
     </application>
 
 </manifest>

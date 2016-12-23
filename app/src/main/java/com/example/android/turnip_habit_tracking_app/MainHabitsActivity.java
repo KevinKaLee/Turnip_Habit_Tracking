@@ -193,4 +193,3 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
         }
     }
 }
-

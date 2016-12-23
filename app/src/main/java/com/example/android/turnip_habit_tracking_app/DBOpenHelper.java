@@ -32,11 +32,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                     HABIT_DESC + " TEXT, " +
                     HABIT_CREATED + " TEXT default CURRENT_TIMESTAMP, " +
                     HABIT_POINTS + " INTEGER default 0 " +
-                " ) " ;
+                    " ) " ;
 
 
     public DBOpenHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     /**
