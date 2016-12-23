@@ -9,10 +9,6 @@
         android:title="@string/delete_all_habits"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/rewards"
-        android:orderInCategory="1"
-        android:title="Rewards"
-        android:showAsAction="never"/>
+
 
 </menu>

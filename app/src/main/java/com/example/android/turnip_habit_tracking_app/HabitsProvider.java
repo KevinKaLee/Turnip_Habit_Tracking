@@ -105,6 +105,4 @@ public class HabitsProvider extends ContentProvider{
         return database.update(DBOpenHelper.TABLE_HABITS, contentValues , selection,selectionArgs);
     }
 
-
-
 }
