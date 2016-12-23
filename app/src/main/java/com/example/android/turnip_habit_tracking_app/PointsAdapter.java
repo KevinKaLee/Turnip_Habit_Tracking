@@ -2,6 +2,9 @@ package com.example.android.turnip_habit_tracking_app;
 
 /**
  * Created by emma on 22/12/16.
+ *
+ * Custom adapter to populate list items for the PointsActivity view from the database.
+ *
  */
 
 import android.content.Context;
@@ -28,7 +31,6 @@ public class PointsAdapter extends CursorAdapter {
 
         String habitText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
         int habitPoints = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_POINTS));
-        // Finds ascii character of new line
         int pos = habitText.indexOf(10);
         if (pos != -1 ){
             habitText = habitText.substring(0,pos) + "...";
@@ -40,7 +42,5 @@ public class PointsAdapter extends CursorAdapter {
         tv1.setText(Integer.toString(habitPoints));
 
     }
-
-    public int getTotal(){return 3;}
 
 }

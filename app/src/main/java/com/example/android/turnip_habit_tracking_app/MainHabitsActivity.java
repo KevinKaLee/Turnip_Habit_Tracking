@@ -62,8 +62,6 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
         getLoaderManager().initLoader(0, null, this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-
     }
 
 
@@ -96,25 +94,14 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
             deleteAllHabits();
         }
 
-        if (id == R.id.rewards) {
-            openRewards();
-        }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Opens up to the  Reward Activity
-     */
-    private void openRewards() {
-        Intent intent = new Intent(this, EditorActivity.class);
-        startActivity(intent);
     }
 
     /**
      * This method asks the user if they are sure they want to delete all habits ,
      * if returns positive , the habits get deleted and the loader is restarted.
      */
+
     private void deleteAllHabits() {
         DialogInterface.OnClickListener dialogClickListener =
                 new DialogInterface.OnClickListener() {
