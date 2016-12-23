@@ -30,7 +30,7 @@ public class StreaksActivity extends AppCompatActivity implements LoaderManager.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        cursorAdapter = new StreaksAdapter(this, null, 0);
+        cursorAdapter = new DataAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 

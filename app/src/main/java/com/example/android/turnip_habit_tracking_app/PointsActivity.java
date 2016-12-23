@@ -30,7 +30,7 @@ public class PointsActivity extends AppCompatActivity implements LoaderManager.L
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        cursorAdapter = new PointsAdapter(this, null, 0);
+        cursorAdapter = new DataAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 

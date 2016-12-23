@@ -13,7 +13,7 @@
         android:contentDescription="@string/turnip_icon"/>
 
     <TextView
-        android:id="@+id/tvNote"
+        android:id="@+id/habitName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
