@@ -3,6 +3,10 @@ package com.example.android.turnip_habit_tracking_app;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+<<<<<<< HEAD
+=======
+
+>>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+<<<<<<< HEAD
+=======
+
+>>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
     }
 
     public void onClickHabits(View view){
@@ -28,4 +36,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> becb5aba28c3d48769ad0186fc7602a956257370

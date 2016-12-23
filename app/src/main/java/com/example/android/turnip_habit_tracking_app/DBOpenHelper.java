@@ -1,6 +1,7 @@
 package com.example.android.turnip_habit_tracking_app;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -15,7 +16,11 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String HABIT_ID = "_id";
     public static final String HABIT_NAME = "habitName";
     public static final String HABIT_DESC = "habitDescription";
+<<<<<<< HEAD
     public static final String HABIT_CREATED = "habitCreated";
+=======
+    public static final String HABIT_CREATED = "habitCreated"; // Used for showing that the habit has been created
+>>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
     public static final String HABIT_POINTS = "habitPoints";
 
     public static final String[] ALL_COLUMNS = {HABIT_ID,HABIT_NAME,HABIT_DESC,HABIT_CREATED, HABIT_POINTS};
@@ -46,5 +51,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> becb5aba28c3d48769ad0186fc7602a956257370
