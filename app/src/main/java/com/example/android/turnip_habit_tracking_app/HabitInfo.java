@@ -22,7 +22,6 @@ public class HabitInfo extends AppCompatActivity {
         //String Table_Name = "habits.db";
         String habitID = bundle.getString("ID");
 
-
         Toast.makeText(getApplicationContext(),habitID,Toast.LENGTH_SHORT).show();
     }
 }

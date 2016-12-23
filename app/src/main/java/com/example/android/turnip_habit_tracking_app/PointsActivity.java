@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class PointsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private CursorAdapter cursorAdapter;
+    private String habitFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,9 @@ public class PointsActivity extends AppCompatActivity implements LoaderManager.L
         cursorAdapter.swapCursor(null);
     }
 
-
-
-
 }
+
+
+
+
+
