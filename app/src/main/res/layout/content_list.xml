@@ -11,27 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.turnip_habit_tracking_app.PointsActivity"
-    tools:showIn="@layout/activity_points">
+    tools:showIn="@layout/activity_streaks">
 
-
-    <include layout="@layout/total_points_item"
-        android:paddingBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/PointsTotalItem"/>
-
-    <include layout="@layout/content_list"
-        android:layout_below="@+id/PointsTotalItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-                                                     />
-
-    <!-- <ListView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/android:list"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/PointsTotalItem" /> -->
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

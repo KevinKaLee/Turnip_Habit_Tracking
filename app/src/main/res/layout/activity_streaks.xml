@@ -19,13 +19,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/view_habits_menu_item"
-        android:id="@+id/viewHabits" />
-
-    <include layout="@layout/view_points_menu_item"
-        android:id="@+id/viewPoints" />
-
-    <include layout="@layout/view_streaks_menu_item"
-        android:id="@+id/viewStreaks" />
+    <include layout="@layout/content_list"/>
 
 </LinearLayout>

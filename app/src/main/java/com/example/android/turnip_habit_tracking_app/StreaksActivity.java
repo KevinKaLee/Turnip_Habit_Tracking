@@ -18,7 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class PointsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class StreaksActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private CursorAdapter cursorAdapter;
 
@@ -26,17 +26,15 @@ public class PointsActivity extends AppCompatActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_points);
+        setContentView(R.layout.activity_streaks);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        cursorAdapter = new PointsAdapter(this, null, 0);
+        cursorAdapter = new StreaksAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 
-        TextView tv = (TextView) findViewById(R.id.PointsTotal);
-        int points = getTotal();
-        tv.setText(Integer.toString(points));
+        TextView tv = (TextView) findViewById(R.id.DataValue);
 
         getLoaderManager().initLoader(0, null, this);
     }
@@ -47,19 +45,6 @@ public class PointsActivity extends AppCompatActivity implements LoaderManager.L
      * @return total points value
      */
 
-    public int getTotal() {
-        int total = 0;
-        Cursor cursor = getContentResolver().query(HabitsProvider.CONTENT_URI, DBOpenHelper.ALL_COLUMNS, null, null, null);
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()) {
-            // null could happen if we used our empty constructor
-            int points = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_POINTS));
-            total+=points;
-            cursor.moveToNext();
-        }
-        return total;
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

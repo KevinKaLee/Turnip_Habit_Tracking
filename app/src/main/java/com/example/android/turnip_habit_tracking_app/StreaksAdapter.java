@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class PointsAdapter extends CursorAdapter {
+public class StreaksAdapter extends CursorAdapter {
 
-    public PointsAdapter(PointsActivity context, Cursor c, int flags) {
+    public StreaksAdapter(StreaksActivity context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
@@ -30,16 +30,15 @@ public class PointsAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         String habitText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
-        int habitPoints = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_POINTS));
+        int Data = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_STREAK));
         int pos = habitText.indexOf(10);
         if (pos != -1 ){
             habitText = habitText.substring(0,pos) + "...";
         }
-
         TextView tv = (TextView) view.findViewById(R.id.HabitName);
         tv.setText(habitText);
         TextView tv1 = (TextView) view.findViewById(R.id.DataValue);
-        tv1.setText(Integer.toString(habitPoints));
+        tv1.setText(Integer.toString(Data));
 
     }
 

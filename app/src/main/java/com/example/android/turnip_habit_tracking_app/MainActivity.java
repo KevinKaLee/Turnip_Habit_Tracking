@@ -27,4 +27,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PointsActivity.class);
         startActivity(intent);
     }
+
+    public void onClickStreaks(View view){
+        Intent intent = new Intent(this, StreaksActivity.class);
+        startActivity(intent);
+    }
 }

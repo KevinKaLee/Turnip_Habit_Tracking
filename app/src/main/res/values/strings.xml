@@ -24,5 +24,6 @@
     <string name="sunday">Sunday</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="habit_details">Habit Details</string>
+    <string name="title_activity_streaks">Streaks</string>
 
 </resources>
