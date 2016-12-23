@@ -7,7 +7,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
-
+/**
+ * <h1>ConfirmSession</h1>
+ * When a session is over the user confirms
+ * whether or not they have completed it, they
+ * are rewarded if it is completed.
+ * <p>
+ *
+ * @author  Eoin Thompson
+ * @version 1.0
+ * @since   23-12-2016
+ */
 public class ConfirmSession extends AppCompatActivity {
 
     @Override
