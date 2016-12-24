@@ -73,7 +73,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      * and also the calendar used to create the start and finish alarms.
      * The method also adds the habit ID into the intents.
      */
-    private void init() {
+    public void init() {
         startTime      = (Button) findViewById(R.id.StartButton);
         finishTime     = (Button) findViewById(R.id.FinishButton);
         startCal       = Calendar.getInstance();
@@ -101,7 +101,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      * check boxes and three button.
      */
     // Initialise Listeners for each Checkbox
-    private void initClickListen(){
+    public void initClickListen(){
         Monday   .setOnClickListener(this);
         Tuesday  .setOnClickListener(this);
         Wednesday.setOnClickListener(this);
@@ -144,7 +144,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      * corresponding checkbox.
      * Once this method is called the alarms are created.
      */
-    private void createAlarms() {
+    public void createAlarms() {
         alarmManager(startCal ,2,1,mon  ,startAlarm);
         alarmManager(finishCal,2,1,mon  ,endAlarm);
         alarmManager(startCal ,3,2,tues ,startAlarm);
@@ -169,7 +169,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      * when creating an alarm.
      * @param  myCalendar  calendar that will be used to create the alarm
      */
-    private void setAlarmTime(final Calendar myCalendar){
+    public void setAlarmTime(final Calendar myCalendar){
         int hour   = myCalendar.get(Calendar.HOUR_OF_DAY);
         int minute = myCalendar.get(Calendar.MINUTE);
         TimePickerDialog mTimerPicker;
@@ -189,9 +189,12 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      * are in the past, if so it adds one week to the alarm time.
      * @param  calendar  calendar that will be used to create the alarm
      */
-    private void checkDAY(Calendar calendar){
+    public void checkDAY(Calendar calendar){
         if(calendar.getTimeInMillis() < System.currentTimeMillis()){
+<<<<<<< HEAD
+=======
             //Toast.makeText(getApplicationContext(),"True",Toast.LENGTH_SHORT).show();
+>>>>>>> ba125fea7f2fd8d10ae079f37a18eddbeea0429d
             calendar.add(Calendar.DAY_OF_YEAR, 7);
         }
     }
@@ -207,7 +210,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      * @param  start  switch used to create or cancel the alarm
      * @param  intent intent determine which reveiver the alarm uses
      */
-    private void alarmManager(Calendar calendar, int day, int uniqueId, boolean start, Intent intent){
+    public void alarmManager(Calendar calendar, int day, int uniqueId, boolean start, Intent intent){
         PendingIntent alarmIntent = PendingIntent.getBroadcast(Alarm.this, uniqueId, intent, 0);
         if(start){
             calendar.set(Calendar.DAY_OF_WEEK,day);
@@ -226,6 +229,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
         int id = day.getId();
         switch (id) {
             case R.id.Monday:
+                Toast.makeText(getApplicationContext(),String.valueOf(id),Toast.LENGTH_SHORT).show();
                 mon = !mon;                        // Track state of checkbox
                 break;
             case R.id.Tuesday:
