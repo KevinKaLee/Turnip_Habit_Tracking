@@ -9,6 +9,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 public class DBTest {
-    private static Context appContext;
+    private Context appContext;
     private static String habitName ="Go to the Gym";
     private static String habitDesc = "Workout Legs";
     private static long habitID = 1;
