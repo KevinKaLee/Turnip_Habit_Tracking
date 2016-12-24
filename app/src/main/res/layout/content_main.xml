@@ -25,4 +25,7 @@
     <include layout="@layout/view_points_menu_item"
         android:id="@+id/viewPoints" />
 
+    <include layout="@layout/view_streaks_menu_item"
+        android:id="@+id/viewStreaks" />
+
 </LinearLayout>

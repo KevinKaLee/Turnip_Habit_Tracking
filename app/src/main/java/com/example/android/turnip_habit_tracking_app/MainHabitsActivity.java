@@ -45,7 +45,7 @@ public class MainHabitsActivity extends AppCompatActivity implements LoaderManag
         setSupportActionBar(toolbar);
 
 
-        cursorAdapter = new HabitsCursorAdapter(this, null, 0);
+        cursorAdapter = new DataAdapter(this, null, 0);
         ListView list = (ListView) findViewById(android.R.id.list);
         list.setAdapter(cursorAdapter);
 

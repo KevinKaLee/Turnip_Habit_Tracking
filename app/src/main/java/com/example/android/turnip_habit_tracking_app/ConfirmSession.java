@@ -27,6 +27,7 @@ public class ConfirmSession extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         final String habitID = bundle.getString("ID");
+        final String habitFilter = DBOpenHelper.HABIT_ID +  "=" + habitID;
 
         // Simple Dialog - Increment Reward if Yes is clicked??
         new AlertDialog.Builder(this)
@@ -34,14 +35,16 @@ public class ConfirmSession extends AppCompatActivity {
                 .setMessage("Have you completed the session?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //execute database query to increment points for given id
-                        String habitFilter = DBOpenHelper.HABIT_ID +  "=" + habitID;
+
                         Cursor cursor = getContentResolver().query(HabitsProvider.CONTENT_URI, DBOpenHelper.ALL_COLUMNS, habitFilter, null, null);
                         cursor.moveToFirst();
                         int points = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_POINTS));
-                        points +=1;
+                        points +=5;
+                        int streak = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_STREAK));
+                        streak +=1;
                         ContentValues values = new ContentValues();
                         values.put(DBOpenHelper.HABIT_POINTS, points);
+                        values.put(DBOpenHelper.HABIT_STREAK, streak);
                         getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
                     }
                 })
@@ -49,6 +52,10 @@ public class ConfirmSession extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplication(),"Clicked - Yes",Toast.LENGTH_SHORT).show();
+                        ContentValues values = new ContentValues();
+                        values.put(DBOpenHelper.HABIT_STREAK, 0);
+                        getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
+
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)

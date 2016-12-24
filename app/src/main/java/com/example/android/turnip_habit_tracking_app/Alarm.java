@@ -130,6 +130,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
                     public void onClick(View view) {
                         createAlarms();
                         Toast.makeText(getApplicationContext(),"Alarm Saved",Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
         );
@@ -190,7 +191,7 @@ public class Alarm extends AppCompatActivity implements View.OnClickListener {
      */
     private void checkDAY(Calendar calendar){
         if(calendar.getTimeInMillis() < System.currentTimeMillis()){
-            Toast.makeText(getApplicationContext(),"True",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"True",Toast.LENGTH_SHORT).show();
             calendar.add(Calendar.DAY_OF_YEAR, 7);
         }
     }

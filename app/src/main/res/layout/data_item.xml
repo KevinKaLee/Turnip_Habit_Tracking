@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true"
         android:textSize="18sp"
         android:padding="10dp"
-        android:id="@+id/HabitName"
+        android:id="@+id/habitName"
         android:layout_alignParentRight="false" />
 
     <TextView
@@ -28,5 +28,5 @@
         android:layout_alignParentEnd="true"
         android:padding="10dp"
         android:textSize="18sp"
-        android:id="@+id/PointsValue" />
+        android:id="@+id/DataValue" />
 </RelativeLayout>
