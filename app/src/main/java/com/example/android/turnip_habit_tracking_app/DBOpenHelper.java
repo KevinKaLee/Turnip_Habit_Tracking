@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     // constants for db name and version
-    private static final String DATABASE_NAME = "habits.db";
+    public static final String DATABASE_NAME = "habits.db";
     private static final int DATABASE_VERSION = 1;
 
     // Constants for identifying table and columns
