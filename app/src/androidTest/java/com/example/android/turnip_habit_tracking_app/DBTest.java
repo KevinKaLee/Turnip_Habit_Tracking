@@ -8,7 +8,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,15 +20,18 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 public class DBTest {
-    private Context appContext;
+    private static Context appContext;
     private static String habitName ="Go to the Gym";
     private static String habitDesc = "Workout Legs";
     private static long habitID = 1;
 
 
-
-    @Before
-    public void useAppContext() throws Exception {
+    /**
+     * This method asserts that the correct Context is being used
+     * @throws Exception
+     */
+    @BeforeClass
+    public static void useAppContext() throws Exception {
         // Context of the app under test.
         appContext = InstrumentationRegistry.getTargetContext();
 
@@ -36,12 +39,17 @@ public class DBTest {
     }
 
 
-
+    /**
+     * This method is a tear down of the table at the end of the test
+     */
     @After
     public void testDropDB(){
         assertTrue("Test DropDB pass", appContext.deleteDatabase(DBOpenHelper.DATABASE_NAME));
     }
 
+    /**
+     * This method tests the creation of the database
+     */
     @Test
     public void testCreateDB(){
         DBOpenHelper dbOpenHelper = new DBOpenHelper(appContext);
@@ -49,6 +57,9 @@ public class DBTest {
         assertTrue("Test CreateDB pass ", db.isOpen());
     }
 
+    /**
+     * This method tests the insertion of data into the database
+     */
     @Test
     public void testInsertData(){
         DBOpenHelper dbOpenHelper = new DBOpenHelper(appContext);
@@ -66,6 +77,9 @@ public class DBTest {
 
     }
 
+    /**
+     * This method tests if the data retrieved from the database correct
+     */
     @Test
     public void testIsDataCorrectInDB() {
         DBOpenHelper dbOpenHelper = new DBOpenHelper(appContext);
