@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void habitConfirmTest(View view){
-
+    public void onClickStreaks(View view){
+        Intent intent = new Intent(this, StreaksActivity.class);
+        startActivity(intent);
     }
 }

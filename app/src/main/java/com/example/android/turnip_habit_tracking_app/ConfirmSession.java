@@ -34,25 +34,51 @@ public class ConfirmSession extends AppCompatActivity {
                 .setMessage("Have you completed the session?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //execute database query to increment points for given id
-                        String habitFilter = DBOpenHelper.HABIT_ID +  "=" + habitID;
-                        Cursor cursor = getContentResolver().query(HabitsProvider.CONTENT_URI, DBOpenHelper.ALL_COLUMNS, habitFilter, null, null);
-                        cursor.moveToFirst();
-                        int points = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_POINTS));
-                        points +=1;
-                        ContentValues values = new ContentValues();
-                        values.put(DBOpenHelper.HABIT_POINTS, points);
-                        getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
+                        updateProgress(habitID);
+
                     }
                 })
 
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplication(),"Clicked - Yes",Toast.LENGTH_SHORT).show();
+                        resetStreak(habitID);
+
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
 
+    /**
+     * Updates progress for completed habit session. Points are incremented by 5 and streak by 1.
+     * @param habitID
+     */
+
+    private void updateProgress(String habitID){
+        String habitFilter = DBOpenHelper.HABIT_ID +  "=" + habitID;
+        Cursor cursor = getContentResolver().query(HabitsProvider.CONTENT_URI, DBOpenHelper.ALL_COLUMNS, habitFilter, null, null);
+        cursor.moveToFirst();
+        int points = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_POINTS));
+        points +=5;
+        int streak = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.HABIT_STREAK));
+        streak +=1;
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.HABIT_POINTS, points);
+        values.put(DBOpenHelper.HABIT_STREAK, streak);
+        getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
+
+    }
+
+    /**
+     * Resets streak to zero for incomplete session. Points are unaffected.
+     * @param habitID
+     */
+
+    private void resetStreak(String habitID) {
+        String habitFilter = DBOpenHelper.HABIT_ID +  "=" + habitID;
+        ContentValues values = new ContentValues();
+        values.put(DBOpenHelper.HABIT_STREAK, 0);
+        getContentResolver().update(HabitsProvider.CONTENT_URI, values, habitFilter, null);
+    }
 }

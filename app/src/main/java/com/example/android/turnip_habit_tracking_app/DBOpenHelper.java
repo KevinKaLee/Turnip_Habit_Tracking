@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     // constants for db name and version
-    private static final String DATABASE_NAME = "habits.db";
+    public static final String DATABASE_NAME = "habits.db";
     private static final int DATABASE_VERSION = 1;
 
     // Constants for identifying table and columns
@@ -21,8 +21,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String HABIT_DESC = "habitDescription";
     public static final String HABIT_CREATED = "habitCreated"; // Used for showing that the habit has been created
     public static final String HABIT_POINTS = "habitPoints";
+    public static final String HABIT_STREAK = "habitStreak";
 
-    public static final String[] ALL_COLUMNS = {HABIT_ID,HABIT_NAME,HABIT_DESC,HABIT_CREATED, HABIT_POINTS};
+    public static final String[] ALL_COLUMNS = {HABIT_ID,HABIT_NAME,HABIT_DESC,HABIT_CREATED, HABIT_POINTS, HABIT_STREAK};
 
     //SQL to create Table
     private static final String TABLE_CREATE =
@@ -31,7 +32,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
                     HABIT_NAME + " TEXT, " +
                     HABIT_DESC + " TEXT, " +
                     HABIT_CREATED + " TEXT default CURRENT_TIMESTAMP, " +
-                    HABIT_POINTS + " INTEGER default 0 " +
+                    HABIT_POINTS + " INTEGER default 0, " +
+                    HABIT_STREAK + " INTEGER default 0 " +
                     " ) " ;
 
 
