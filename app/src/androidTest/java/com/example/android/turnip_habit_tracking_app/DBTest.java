@@ -8,7 +8,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,8 +30,8 @@ public class DBTest {
      * This method asserts that the correct Context is being used
      * @throws Exception
      */
-    @BeforeClass
-    public static void useAppContext() throws Exception {
+    @Before
+    public void useAppContext() throws Exception {
         // Context of the app under test.
         appContext = InstrumentationRegistry.getTargetContext();
 
