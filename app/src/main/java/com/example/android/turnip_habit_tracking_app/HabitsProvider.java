@@ -106,3 +106,8 @@ public class HabitsProvider extends ContentProvider{
     }
 
 }
+
+
+
+
+
