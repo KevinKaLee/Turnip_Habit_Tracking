@@ -60,19 +60,27 @@ public class EditorActivity extends AppCompatActivity {
             action = Intent.ACTION_EDIT;
             setTitle(getString(R.string.edit_habit));
 
-            habitFilter = DBOpenHelper.HABIT_ID +  "=" + uri.getLastPathSegment();
-
-            Cursor cursor = getContentResolver().query(uri, DBOpenHelper.ALL_COLUMNS, habitFilter, null , null);
-
-            cursor.moveToFirst();
-            oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
-            oldHabitDesc = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_DESC));
-            habit_id = uri.getLastPathSegment();
-            desc_editor.setText(oldHabitDesc);
-            editor.setText(oldText);
-            editor.requestFocus();
+            setEditText();
         }
 
+    }
+
+    /**
+     * This method reads from the database and sets the textboxes on the edit screen to the corresponding
+     * text from the database.
+     */
+    private void setEditText() {
+        habitFilter = DBOpenHelper.HABIT_ID +  "=" + uri.getLastPathSegment();
+
+        Cursor cursor = getContentResolver().query(uri, DBOpenHelper.ALL_COLUMNS, habitFilter, null , null);
+
+        cursor.moveToFirst();
+        oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_NAME));
+        oldHabitDesc = cursor.getString(cursor.getColumnIndex(DBOpenHelper.HABIT_DESC));
+        habit_id = uri.getLastPathSegment();
+        desc_editor.setText(oldHabitDesc);
+        editor.setText(oldText);
+        editor.requestFocus();
     }
 
     /**
